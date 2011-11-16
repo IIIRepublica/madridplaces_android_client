@@ -4,36 +4,11 @@
         <title>The Man of the Vara Mobile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-        <script type="text/javascript">
-
-			$(document).ready(function() {
-				
-				$("#cp").submit(function() {
-				    $.post("http://madridplaces.herokuapp.com/calificacion", $('#cp').serialize(), function(data) {
-				        console.log(data);
-				    	$("#resultados").replaceWith(data);
-				    });
-				    return false;
-				});
-				
-				$("#Metro").live( 'pagebeforecreate', function(event){
-					console.log("Antes de crear la pag");
-					$.get('http://madridplaces.herokuapp.com/lineas', function(data) {
-						console.log("Llamando a lineas devuelve " + data);
-						$("#Metro").replaceWith(data);
-					});
-					
-				);
-				
-				$(document).bind("deviceready", function() { });
-				
-			});
-			
-		</script>
+        <link rel="stylesheet" href="resources/css/jquery.mobile-1.0rc3.min.css" />
+		<script src="resources/js/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="resources/js/madridplaces.js"></script>
+		<script src="resources/js/jquery.mobile-1.0rc3.min.js"></script>
+		<script src="resources/js/phonegap-1.1.0.js"></script>
     </head>
 <body>
   <!-- INICIO -->
@@ -68,7 +43,7 @@
 					class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-icon ui-btn-up-c"><div
 						class="ui-btn-inner ui-li">
 						<div class="ui-btn-text">
-							<a href="#Metro" class="ui-link-inherit" data-ajax="false"><img
+							<a href="#Metro" class="ui-link-inherit" id="gotolineas"><img
 								src="images/metro.png" alt="Metro" class="ui-li-icon ui-li-thumb" height="16" width="16px" >
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metro</a>
 						</div>
@@ -88,7 +63,7 @@
   <div data-role="page" id="info" data-title="Informaci&oacute;n">
       <!--Header-->
       <div data-role="header" data-position="inline" data-theme="a">
-          <a href="#inicio" data-icon="arrow-l" data-theme="a">Volver</a>
+          <a href="#home" data-icon="arrow-l" data-theme="a">Volver</a>
           <h1>Informaci&oacute;n</h1>
       </div>
       <!--/Header-->
@@ -109,7 +84,7 @@
   <div data-role="page" id="grupoX" data-title="Grupo 10">
       <!--Header-->
       <div data-role="header" data-position="inline" data-theme="a">
-          <a href="#inicio" data-icon="arrow-l" data-theme="a">Volver</a>
+          <a href="#home" data-icon="arrow-l" data-theme="a">Volver</a>
           <h1>Grupo 10</h1>
       </div>
       <!--/Header-->
@@ -119,7 +94,7 @@
           <p>Javier Urosa Domingo</p>
           <p>Alicia Mª Guerra Lafuente</p>
           <p>Víctor Moreno Sanz <strong>64242</strong></p>
-          <p>Alejandro Gil-Dávila</p>
+          <p>Alejandro Gil-Dávila <strong>64309</strong></p>
       </div>
 
       <!-- Footer -->
@@ -162,25 +137,23 @@
    <!-- /Cód.Postal -->
 
    <!-- Metro -->
-   <div data-role="page" id="Metro" data-title="Metro">
-
+   <div data-role="page" id="Metro" data-title="Metro" >
+		 
        <div data-role="header" data-position="inline" data-theme="a">
             <a href="#home" data-icon="arrow-l" data-theme="a">Volver</a>
            <h1>Metro</h1>
        </div>
-       <!-- /header -->
-
+       
        <div data-role="content">
            <p>Dime la parada de metro m&aacute;s cercana a tu posici&oacute;n y te dire con que te vas a encontrar.</p>
            <div id="lineasmetro" data-role="collapsible-set">
       
            </div>
        </div>
-		 <!-- Footer -->
 		<div data-role="footer" data-theme="a">
 		    <h4>&copy; Grupo 10</h4>
 		</div>
-		<!-- /Footer -->
+		
    </div>
    <!-- /Metro -->
    
@@ -194,7 +167,9 @@
        <!--/Header-->
 
        <div data-role="content" data-theme="a">
-
+			<h1>Peligrosidad <span id="pctjePeligrosidad"></span></h1>
+			<p><img id="imgPeligrosidad" src="" alt="Peligrosidad" /></p>
+			<p id="comentario"></p>
        </div>
 
        <!-- Footer -->
