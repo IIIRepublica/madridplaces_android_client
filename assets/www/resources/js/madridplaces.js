@@ -1,31 +1,30 @@
-var appBaseUrl = "http://madridplaces.herokuapp.com";
-
-function updateCalificacion(data) {
-	if (data.comentario != null) {
-		$("#pctjePeligrosidad").text(data.min + "-" + data.max + " %");
-		var imgsrc = "";
-		if (data.nivel == 'MUY_SEGURO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_verde.png";
-		} else if (data.nivel == 'SEGURO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_verde_amarilla.png";
-		} else if (data.nivel == 'MEDIO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_amarilla.png";
-		} else if (data.nivel == 'PELIGROSO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_naranja.png";
-		} else if (data.nivel == 'MUY_PELIGROSO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_roja.png";
-		}
-		$("#imgPeligrosidad").attr("src", imgsrc);
-		$("#comentario").text(data.comentario);
-		
-	} else {
-		$("#pctjePeligrosidad").text(" no disponible");
-		$("#comentario").text("Lo sentimos, no disponemos de datos de peligrosidad para el Cod.Postal introducido");
-	}
-	$.mobile.changePage($("#resultados"), {transition: 'flip', reload: true});
-}
-
 $( function() {
+	var appBaseUrl = "http://madridplaces.herokuapp.com";
+
+	function updateCalificacion(data) {
+		if (data.comentario != null) {
+			$("#pctjePeligrosidad").text(data.min + "-" + data.max + " %");
+			var imgsrc = "";
+			if (data.nivel == 'MUY_SEGURO') {
+				imgsrc = appBaseUrl + "/resources/images/carita_verde.png";
+			} else if (data.nivel == 'SEGURO') {
+				imgsrc = appBaseUrl + "/resources/images/carita_verde_amarilla.png";
+			} else if (data.nivel == 'MEDIO') {
+				imgsrc = appBaseUrl + "/resources/images/carita_amarilla.png";
+			} else if (data.nivel == 'PELIGROSO') {
+				imgsrc = appBaseUrl + "/resources/images/carita_naranja.png";
+			} else if (data.nivel == 'MUY_PELIGROSO') {
+				imgsrc = appBaseUrl + "/resources/images/carita_roja.png";
+			}
+			$("#imgPeligrosidad").attr("src", imgsrc);
+			$("#comentario").text(data.comentario);
+			
+		} else {
+			$("#pctjePeligrosidad").text(" no disponible");
+			$("#comentario").text("Lo sentimos, no disponemos de datos de peligrosidad para el Cod.Postal introducido");
+		}
+		$.mobile.changePage($("#resultados"));
+	}
 		
 	$("#cp").submit(function() {
 		$.mobile.showPageLoadingMsg();
@@ -62,8 +61,8 @@ $( function() {
 					// para cada parada
 					for ( var j = 0; j < paradas.length; j++) {
 						var parada = paradas[j];
-						var $li = $('<li><a href="#resultados" data-ajax="false" data-url="' + '?num1=' + parada.codPostal[3] + '&num2=' 
-								+ parada.codPostal[4]  + '">' + parada.nombre + '</a></li>');
+						var $li = $('<li><a href="#resultados" data-ajax="false" data-url="' + '?num1=' + parada.codPostal[3] + '&num2='
+									+ parada.codPostal[4]  + '">' + parada.nombre + '</a></li>');
 						$ullinea.append($li);
 					}						
 					
