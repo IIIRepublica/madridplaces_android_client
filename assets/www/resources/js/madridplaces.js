@@ -5,15 +5,15 @@ function updateCalificacion(data) {
 		$("#pctjePeligrosidad").text(data.min + "-" + data.max + " %");
 		var imgsrc = "";
 		if (data.nivel == 'MUY_SEGURO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_verde.png";
+			imgsrc = "resources/images/carita_verde.png";
 		} else if (data.nivel == 'SEGURO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_verde_amarilla.png";
+			imgsrc = "resources/images/carita_verde_amarilla.png";
 		} else if (data.nivel == 'MEDIO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_amarilla.png";
+			imgsrc = "resources/images/carita_amarilla.png";
 		} else if (data.nivel == 'PELIGROSO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_naranja.png";
+			imgsrc = "resources/images/carita_naranja.png";
 		} else if (data.nivel == 'MUY_PELIGROSO') {
-			imgsrc = appBaseUrl + "/resources/images/carita_roja.png";
+			imgsrc = "resources/images/carita_roja.png";
 		}
 		$("#imgPeligrosidad").attr("src", imgsrc);
 		$("#comentario").text(data.comentario);
